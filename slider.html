@@ -1,0 +1,106 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Простой слайдер</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: #f5f5f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  .slider {
+    width: 500px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    overflow: hidden;
+    text-align: center;
+    padding: 15px;
+  }
+
+  .slider img {
+    max-width: 100%;
+    border-radius: 8px;
+  }
+
+  .controls {
+    margin-top: 10px;
+  }
+
+  .controls button {
+    background: #007BFF;
+    border: none;
+    padding: 8px 15px;
+    color: #fff;
+    font-size: 14px;
+    margin: 0 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+
+  .controls button:hover {
+    background: #0056b3;
+  }
+
+  .counter {
+    margin-top: 8px;
+    font-size: 14px;
+    color: #333;
+  }
+</style>
+</head>
+<body>
+
+<div class="slider">
+  <img id="slide" src="https://picsum.photos/id/1015/500/300" alt="Слайд">
+  <div class="controls">
+    <button id="prev">⟵ Назад</button>
+    <button id="next">Вперед ⟶</button>
+  </div>
+  <div class="counter" id="counter">Изображение 1 из 5</div>
+</div>
+
+<script>
+  const images = [
+    "https://picsum.photos/id/1015/500/300",
+    "https://picsum.photos/id/1016/500/300",
+    "https://picsum.photos/id/1018/500/300",
+    "https://picsum.photos/id/1020/500/300",
+    "https://picsum.photos/id/1024/500/300"
+  ];
+
+  let currentIndex = 0;
+
+  const slide = document.getElementById("slide");
+  const counter = document.getElementById("counter");
+  const prevBtn = document.getElementById("prev");
+  const nextBtn = document.getElementById("next");
+
+  function updateSlider() {
+    slide.src = images[currentIndex];
+    counter.textContent = `Изображение ${currentIndex + 1} из ${images.length}`;
+  }
+
+  prevBtn.addEventListener("click", () => {
+    currentIndex = (currentIndex - 1 + images.length) % images.length;
+    updateSlider();
+  });
+
+  nextBtn.addEventListener("click", () => {
+    currentIndex = (currentIndex + 1) % images.length;
+    updateSlider();
+  });
+
+  updateSlider();
+</script>
+
+</body>
+</html>
